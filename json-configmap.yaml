@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-script
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-script
+  template:
+    metadata:
+      labels:
+        app: python-script
+    spec:
+      volumes:
+        # `name` here must match the name
+        # specified in the volume mount
+        - name: json-configmap-volume
+          #
+          configMap:
+            # `name` here must match the name
+            # specified in the ConfigMap's YAML
+            name: json-configmap
+
+      containers:
+        - name: python-script
+          image: python-app:latest
+          volumeMounts:
+          - mountPath: /etc/config
+            name: json-configmap-volume
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1Gi
