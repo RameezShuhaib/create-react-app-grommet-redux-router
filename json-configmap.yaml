@@ -16,10 +16,7 @@ spec:
         # `name` here must match the name
         # specified in the volume mount
         - name: json-configmap-volume
-          #
           configMap:
-            # `name` here must match the name
-            # specified in the ConfigMap's YAML
             name: json-configmap
 
       containers:
@@ -30,5 +27,5 @@ spec:
             name: json-configmap-volume
           resources:
             requests:
-              cpu: 100m
-              memory: 1Gi
+              cpu: 500m
+              memory: 2Gi
